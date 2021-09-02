@@ -24,6 +24,8 @@ import ffmpeg
 import asyncio
 import requests
 import youtube_dl
+from random import randint
+from urllib.parse import urlparse
 from config import Config
 from pyrogram import Client, filters
 from pyrogram.types import Message
@@ -136,6 +138,12 @@ def time_formatter(milliseconds: int) -> str:
         + ((str(milliseconds) + " millisecond(s), ") if milliseconds else "")
     )
     return tmp[:-2]
+
+
+def get_file_extension_from_url(url):
+    url_path = urlparse(url).path
+    basename = os.path.basename(url_path)
+    return basename.split(".")[-1]
 
 
 def time_to_seconds(time):
